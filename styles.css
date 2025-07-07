@@ -23,6 +23,9 @@ html, body {
   color: var(--text);
   font-family: 'Hestia', 'Segoe UI', 'Arial', sans-serif;
   overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
 }
 
 /* Cyberpunk scrollbar */
@@ -1070,7 +1073,7 @@ body::before {
 /* Theme Toggle Button - Fixed */
 .theme-toggle {
   position: fixed;
-  top: 160px;
+  top: 80px;
   right: 20px;
   background: linear-gradient(45deg, var(--accent), var(--accent-2));
   border: none;
@@ -1096,6 +1099,115 @@ body::before {
   box-shadow: var(--neon-glow);
 }
 
+/* 3D Models Toggle Button */
+.models-toggle {
+  position: fixed;
+  top: 140px;
+  right: 20px;
+  background: linear-gradient(45deg, var(--accent-3), var(--accent));
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 128, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.models-toggle:hover {
+  transform: scale(1.1) rotate(180deg);
+  box-shadow: 0 0 20px var(--accent-3), 0 0 40px var(--accent-3), 0 0 60px var(--accent-3);
+}
+
+.models-toggle.disabled {
+  background: linear-gradient(45deg, #666, #888);
+  border-color: rgba(255, 255, 255, 0.2);
+  opacity: 0.6;
+}
+
+.models-toggle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.models-toggle:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* 3D Models visibility control */
+.models-disabled #hologram-canvas,
+.models-disabled .mascot-svg,
+.models-disabled #particles-js,
+.models-disabled #matrix-bg {
+  display: none !important;
+}
+
+/* Mobile positioning for models toggle */
+@media (max-width: 768px) {
+  .models-toggle {
+    top: 130px !important;
+    right: 15px !important;
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 16px !important;
+  }
+  
+  .theme-toggle {
+    top: 70px !important;
+    right: 15px !important;
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .weather-controls {
+    top: 180px !important;
+    right: 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .models-toggle {
+    top: 120px !important;
+    right: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+  
+  .theme-toggle {
+    top: 60px !important;
+    right: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 16px !important;
+  }
+  
+  .weather-controls {
+    top: 170px !important;
+    right: 10px !important;
+  }
+}
+
 /* Fixed Mobile Responsive Design */
 @media (max-width: 768px) {
   .advanced-features-section {
@@ -1115,7 +1227,15 @@ body::before {
   
   .ai-chat-container,
   .mini-game-container {
-    height: 300px;
+    height: 350px !important;
+  }
+  
+  .game-area {
+    min-height: 200px !important;
+  }
+  
+  .chat-messages {
+    max-height: 180px !important;
   }
   
   #hologram-canvas {
@@ -1151,11 +1271,10 @@ body::before {
   }
   
   .theme-toggle {
-    top: 120px !important;
+    top: 70px !important;
     right: 10px !important;
-    width: 40px;
-    height: 40px;
-    font-size: 14px;
+    width: 45px !important;
+    height: 45px !important;
   }
   
   .ai-chat-container {
@@ -1249,30 +1368,18 @@ body::before {
   .theme-toggle {
     top: 110px !important;
     right: 5px !important;
-    width: 35px;
-    height: 35px;
-    font-size: 12px;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 16px !important;
   }
   
-  .nav-menu {
-    gap: 10px;
+  .ai-chat-container,
+  .mini-game-container {
+    height: 320px !important;
   }
   
-  .nav-link {
-    font-size: 11px;
-  }
-  
-  .hud-element {
-    font-size: 10px;
-    padding: 5px;
-  }
-  
-  .perf-monitor {
-    grid-template-columns: 1fr;
-  }
-  
-  .perf-value {
-    font-size: 20px;
+  .feature-container {
+    padding: 15px !important;
   }
 }
 
@@ -1490,7 +1597,7 @@ footer {
   clear: both;
 }
 
-/* Epic Gaming Features Section Loading Animation */
+/* EPIC GAMING FEATURES SECTION LOADING ANIMATION */
 .advanced-features-section {
   animation: slideInFromBottom 1s ease-out;
 }
@@ -1540,5 +1647,548 @@ footer {
   .advanced-features-section .cyber-title {
     font-size: 2rem;
     letter-spacing: 2px;
+  }
+}
+
+/* AI Chat Container - Cyberpunk Style */
+.ai-chat-container {
+  height: 400px;
+  background: var(--box-bg);
+  border: 2px solid var(--accent);
+  border-radius: var(--card-radius);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    var(--shadow),
+    0 0 30px rgba(0, 255, 255, 0.2),
+    inset 0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+.ai-chat-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  background-size: 200% 100%;
+  animation: gradientShift 2s linear infinite;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--main-bg);
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.3);
+  max-height: 250px;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+  animation: slideInMessage 0.3s ease-out;
+}
+
+@keyframes slideInMessage {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-message.user {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 3px;
+}
+
+.chat-message.ai {
+  background: var(--box-bg);
+  color: var(--text);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-bottom-left-radius: 3px;
+}
+
+.chat-input-container {
+  display: flex;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 25px;
+  padding: 10px 15px;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.chat-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.chat-input::placeholder {
+  color: var(--gray);
+}
+
+.chat-send {
+  background: linear-gradient(45deg, var(--accent), var(--accent-2));
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-send:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+/* Mini Game Container - Reflex Trainer */
+.mini-game-container {
+  height: 400px;
+  background: var(--box-bg);
+  border: 2px solid var(--accent-3);
+  border-radius: var(--card-radius);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    var(--shadow),
+    0 0 30px rgba(0, 255, 128, 0.2),
+    inset 0 0 20px rgba(0, 255, 128, 0.05);
+}
+
+.mini-game-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-3), var(--accent), var(--accent-2));
+  background-size: 200% 100%;
+  animation: gradientShift 2s linear infinite reverse;
+}
+
+.game-header {
+  background: linear-gradient(135deg, var(--accent-3), var(--accent));
+  color: var(--main-bg);
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.game-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 255, 128, 0.2);
+}
+
+.game-start {
+  background: linear-gradient(45deg, var(--accent-3), var(--accent));
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  color: var(--main-bg);
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.game-start:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.5);
+}
+
+.game-score {
+  color: var(--accent-3);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 0 10px rgba(0, 255, 128, 0.5);
+}
+
+.game-area {
+  flex: 1;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  background: radial-gradient(circle at center, rgba(0, 255, 128, 0.1), transparent);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.game-target {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, var(--accent-2), var(--accent));
+  border-radius: 50%;
+  cursor: pointer;
+  animation: targetPulse 1s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.7),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  z-index: 2 !important;
+  pointer-events: auto !important;
+}
+
+@keyframes targetPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.game-target::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Sound Visualizer */
+.sound-visualizer {
+  text-align: center;
+  padding: 20px;
+}
+
+.sound-visualizer h4 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+#visualizer-canvas {
+  width: 100%;
+  height: 150px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Server Status */
+.server-status {
+  background: var(--box-bg);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.server-header {
+  color: var(--accent);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.server-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-3);
+}
+
+.server-name {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.server-ping {
+  color: var(--accent-3);
+  font-size: 0.9rem;
+}
+
+.server-status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-3);
+  box-shadow: 0 0 10px var(--accent-3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Performance Monitor */
+.performance-monitor {
+  background: var(--box-bg);
+  border-radius: var(--card-radius);
+  padding: 20px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.perf-header {
+  color: var(--accent);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.perf-monitor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.perf-item {
+  text-align: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.perf-label {
+  color: var(--gray);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.perf-value {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Hologram Canvas */
+#hologram-canvas {
+  width: 100%;
+  height: 250px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Shared animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Fix for reflex trainer positioning and interaction */
+.game-area {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  background: radial-gradient(circle at center, rgba(0, 255, 128, 0.1), transparent);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.game-target {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, var(--accent-2), var(--accent));
+  border-radius: 50%;
+  cursor: pointer;
+  animation: targetPulse 1s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.7),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  z-index: 2 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure proper theme toggle visibility */
+.theme-toggle {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Fix mobile responsiveness for advanced features */
+@media (max-width: 768px) {
+  .ai-chat-container,
+  .mini-game-container {
+    height: 350px !important;
+  }
+  
+  .game-area {
+    min-height: 200px !important;
+  }
+  
+  .chat-messages {
+    max-height: 180px !important;
+  }
+  
+  .theme-toggle {
+    top: 70px !important;
+    right: 15px !important;
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
+
+/* Additional fixes for small screens */
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 60px !important;
+    right: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 16px !important;
+  }
+  
+  .ai-chat-container,
+  .mini-game-container {
+    height: 320px !important;
+  }
+  
+  .feature-container {
+    padding: 15px !important;
+  }
+}
+
+/* Steam Profile Links */
+.steam-profile-link {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.steam-profile-link:hover {
+  filter: drop-shadow(0 0 15px rgba(0, 173, 238, 0.6)) !important;
+}
+
+/* Squad card positioning for Steam links */
+.squad-card {
+  position: relative !important;
+}
+
+/* Mascot Easter Egg Animations */
+.mascot-shorts-svg {
+  transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center top;
+}
+
+.mascot-shorts-svg.pants-down {
+  transform: translateY(250px) !important;
+  animation: pantsWiggle 0.5s ease-in-out;
+}
+
+@keyframes pantsWiggle {
+  0%, 100% { transform: translateY(50px) rotate(0deg); }
+  25% { transform: translateY(50px) rotate(-2deg); }
+  75% { transform: translateY(50px) rotate(2deg); }
+}
+
+.mascot-svg.easter-egg-active {
+  animation: mascotBlush 2s ease-in-out;
+  filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.8)) !important;
+}
+
+@keyframes mascotBlush {
+  0%, 100% { 
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.8));
+  }
+}
+
+/* Easter Egg Confetti Animation */
+@keyframes confettiFall {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + 200px), calc(-50% + 400px)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Easter Egg Message Animation */
+@keyframes easterEggMessage {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
   }
 }

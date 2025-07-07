@@ -40,9 +40,15 @@ function initializeAllEffects() {
     initAOS();
     initCyberEffects();
     
-    // Original functions
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // Initialize 3D models toggle
+    init3DModelsToggle();
+    
+    // Initialize Steam profile integration
+    initSteamProfiles();
+    
+    // Original functions with fixed countdown
+    fixedCountdownUpdate();
+    setInterval(fixedCountdownUpdate, 1000);
     updateNavbar();
     updateParallax();
     initDudeAnimation();
@@ -506,14 +512,7 @@ function epicMascotEffects() {
     const shorts = document.querySelector('#mascot-shorts');
     
     if (mascot) {
-        // Epic click effect
-        mascot.addEventListener('click', () => {
-            epicScreenShake();
-            mascot.style.filter = 'drop-shadow(0 0 50px #00ffff) saturate(2) contrast(1.5)';
-            setTimeout(() => {
-                mascot.style.filter = '';
-            }, 1000);
-        });
+        // Note: Click handler is now handled in initEpicConsoleCommands for Easter egg
         
         // Enhanced scroll animation
         let lastScrollY = 0;
@@ -705,17 +704,165 @@ function initEpicEasterEggs() {
         }
     });
     
-    // Secret click combo on mascot
+    // Secret click combo on mascot - Pants Drop Easter Egg
     let clickCount = 0;
     const mascot = document.querySelector('#mascot-dude');
-    if (mascot) {
-        mascot.addEventListener('click', () => {
+    const mascotSvg = document.querySelector('.mascot-svg');
+    const shorts = document.querySelector('.mascot-shorts-svg');
+    
+    if (mascot && shorts) {
+        mascot.addEventListener('click', (e) => {
+            e.preventDefault();
             clickCount++;
+            
+            console.log(`👖 Mascot click ${clickCount}/10`);
+            
+            // Visual feedback for each click
+            if (mascotSvg) {
+                mascotSvg.style.animation = 'cyber-pulse 0.3s ease';
+                setTimeout(() => {
+                    mascotSvg.style.animation = '';
+                }, 300);
+            }
+            
+            // Easter egg activation on 10th click
             if (clickCount >= 10) {
-                activateUltraEpicMode();
+                console.log('🎉 EASTER EGG: Pants down! 🎉');
+                activatePantsDropEasterEgg();
                 clickCount = 0;
             }
         });
+    }
+    
+    function activatePantsDropEasterEgg() {
+        const mascotSvg = document.querySelector('.mascot-svg');
+        const shorts = document.querySelector('.mascot-shorts-svg');
+        
+        if (shorts && mascotSvg) {
+            // Add the pants-down class
+            shorts.classList.add('pants-down');
+            mascotSvg.classList.add('easter-egg-active');
+            
+            // Create confetti effect
+            createConfetti();
+            
+            // Epic screen shake
+            epicScreenShake();
+            
+            // Play sound effect (if available)
+            playEasterEggSound();
+            
+            // Reset after 5 seconds
+            setTimeout(() => {
+                shorts.classList.remove('pants-down');
+                mascotSvg.classList.remove('easter-egg-active');
+                console.log('👖 Pants back up!');
+            }, 5000);
+            
+            // Show easter egg message
+            showEasterEggMessage();
+        }
+    }
+    
+    function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            const randomX = Math.random() * 400 - 200; // Random X offset
+            const randomRotation = Math.random() * 720 + 360; // Random rotation
+            const randomDuration = 1 + Math.random() * 2; // Random duration
+            
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${['#00ffff', '#ff0080', '#00ff80'][Math.floor(Math.random() * 3)]};
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                animation: confettiFall ${randomDuration}s ease-out forwards;
+                transform: translate(-50%, -50%);
+            `;
+            
+            // Apply random transform using CSS custom properties
+            confetti.style.setProperty('--random-x', randomX + 'px');
+            confetti.style.setProperty('--random-rotation', randomRotation + 'deg');
+            confetti.style.animation = `confettiFall ${randomDuration}s ease-out forwards`;
+            
+            document.body.appendChild(confetti);
+            
+            // Animate with JavaScript for more control
+            confetti.animate([
+                {
+                    transform: 'translate(-50%, -50%) rotate(0deg)',
+                    opacity: 1
+                },
+                {
+                    transform: `translate(calc(-50% + ${randomX}px), calc(-50% + 400px)) rotate(${randomRotation}deg)`,
+                    opacity: 0
+                }
+            ], {
+                duration: randomDuration * 1000,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, randomDuration * 1000 + 100);
+        }
+    }
+    
+    function playEasterEggSound() {
+        // Try to play a sound if audio context is available
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(880, audioContext.currentTime + 0.2);
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.5);
+        } catch (e) {
+            console.log('🔇 Audio not available');
+        }
+    }
+    
+    function showEasterEggMessage() {
+        const message = document.createElement('div');
+        message.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, var(--accent), var(--accent-2));
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 10000;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: easterEggMessage 3s ease-out forwards;
+        `;
+        message.textContent = '🎉 EASTER EGG ACTIVATED! 🎉';
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.remove();
+        }, 3000);
     }
 }
 
@@ -829,6 +976,63 @@ function updateCountdown() {
         const countdownBoxes = document.querySelectorAll('.countdown-box');
         countdownBoxes.forEach(box => {
             box.firstChild.textContent = '00';
+        });
+    }
+}
+
+// Fixed Countdown Function
+function fixedCountdownUpdate() {
+    const targetDate = new Date('2025-08-15T20:00:00').getTime(); // Set a proper future date
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const countdownBoxes = document.querySelectorAll('.countdown-box');
+        if (countdownBoxes.length >= 4) {
+            // Safely update countdown without causing glitches
+            const newValues = [
+                String(days).padStart(2, '0'),
+                String(hours).padStart(2, '0'),
+                String(minutes).padStart(2, '0'),
+                String(seconds).padStart(2, '0')
+            ];
+            
+            countdownBoxes.forEach((box, index) => {
+                const textNode = box.firstChild;
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    if (textNode.textContent !== newValues[index]) {
+                        textNode.textContent = newValues[index];
+                        
+                        // Add subtle pulse effect only on change
+                        if (index === 3) { // Only animate seconds
+                            box.style.transform = 'scale(1.05)';
+                            setTimeout(() => {
+                                box.style.transform = '';
+                            }, 200);
+                        }
+                    }
+                } else {
+                    // If the structure is different, find the right element
+                    const numberElement = box.querySelector('.countdown-number') || box;
+                    if (numberElement.textContent !== newValues[index]) {
+                        numberElement.textContent = newValues[index];
+                    }
+                }
+            });
+        }
+    } else {
+        // Countdown expired
+        const countdownBoxes = document.querySelectorAll('.countdown-box');
+        countdownBoxes.forEach(box => {
+            const textNode = box.firstChild;
+            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = '00';
+            }
         });
     }
 }
@@ -2164,6 +2368,7 @@ function showEpicLoadingScreen() {
         }
         
         .loading-bar {
+           
             width: 100%;
             height: 4px;
             background: rgba(0, 255, 255, 0.2);
@@ -2554,3 +2759,153 @@ Type 'khkp.showSecrets()' for hidden commands!
     
     console.log('🌟 Epic experience finalized!');
 }
+
+// 3D Models Toggle Functionality
+function init3DModelsToggle() {
+    const modelsToggle = document.querySelector('.models-toggle');
+    
+    if (!modelsToggle) return;
+    
+    console.log('🎲 Initializing 3D Models Toggle...');
+    
+    let modelsEnabled = localStorage.getItem('khkp-3d-models') !== 'false';
+    
+    // Set initial state
+    updateModelsState(modelsEnabled);
+    
+    modelsToggle.addEventListener('click', () => {
+        modelsEnabled = !modelsEnabled;
+        updateModelsState(modelsEnabled);
+        localStorage.setItem('khkp-3d-models', modelsEnabled);
+        
+        // Epic toggle effect
+        modelsToggle.style.animation = 'cyber-pulse 0.3s ease';
+        setTimeout(() => {
+            modelsToggle.style.animation = '';
+        }, 300);
+        
+        console.log(`🎲 3D Models ${modelsEnabled ? 'enabled' : 'disabled'}`);
+    });
+}
+
+function updateModelsState(enabled) {
+    const body = document.body;
+    const modelsToggle = document.querySelector('.models-toggle');
+    
+    if (enabled) {
+        body.classList.remove('models-disabled');
+        modelsToggle.classList.remove('disabled');
+        modelsToggle.title = 'Disable 3D Models';
+    } else {
+        body.classList.add('models-disabled');
+        modelsToggle.classList.add('disabled');
+        modelsToggle.title = 'Enable 3D Models';
+    }
+}
+
+// Steam Profile Integration
+function initSteamProfiles() {
+    console.log('🎮 Initializing Steam Profile Integration...');
+    
+    // Get all squad cards with Steam IDs
+    const squadCards = document.querySelectorAll('.squad-card[data-steam-id]');
+    
+    squadCards.forEach(squadCard => {
+        const steamId = squadCard.getAttribute('data-steam-id');
+        const playerName = squadCard.querySelector('.squad-name')?.textContent.trim();
+        
+        // Skip placeholder IDs
+        if (!steamId || steamId.includes('XXXXXX')) {
+            console.log(`⚠️ Placeholder Steam ID for ${playerName}, skipping`);
+            return;
+        }
+        
+        // Add Steam profile link
+        const steamLink = document.createElement('a');
+        steamLink.href = `https://steamcommunity.com/profiles/${steamId}`;
+        steamLink.target = '_blank';
+        steamLink.title = `View ${playerName}'s Steam Profile`;
+        steamLink.className = 'steam-profile-link';
+        steamLink.style.cssText = `
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(45deg, #00adee, #171a21);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: 2px solid rgba(0, 173, 238, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        `;
+        steamLink.innerHTML = '🎮';
+        
+        // Enhanced hover effects
+        steamLink.addEventListener('mouseenter', () => {
+            steamLink.style.transform = 'scale(1.2) rotate(10deg)';
+            steamLink.style.boxShadow = '0 0 20px rgba(0, 173, 238, 0.8)';
+            steamLink.style.background = 'linear-gradient(45deg, #00d4ff, #0066cc)';
+        });
+        
+        steamLink.addEventListener('mouseleave', () => {
+            steamLink.style.transform = 'scale(1) rotate(0deg)';
+            steamLink.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
+            steamLink.style.background = 'linear-gradient(45deg, #00adee, #171a21)';
+        });
+        
+        // Click effect
+        steamLink.addEventListener('click', (e) => {
+            steamLink.style.animation = 'cyber-pulse 0.3s ease';
+            setTimeout(() => {
+                steamLink.style.animation = '';
+            }, 300);
+        });
+        
+        squadCard.style.position = 'relative';
+        squadCard.appendChild(steamLink);
+        
+        console.log(`✅ Steam link added for ${playerName}`);
+    });
+    
+    // Add instructions for developers
+    if (squadCards.length === 0 || Array.from(squadCards).every(card => 
+        card.getAttribute('data-steam-id')?.includes('XXXXXX'))) {
+        console.log(`
+🎮 STEAM INTEGRATION SETUP INSTRUCTIONS:
+
+To enable real Steam profile integration:
+
+1. Get Steam IDs for each player:
+   - Visit: https://steamid.xyz/
+   - Enter Steam profile URL or username
+   - Copy the 64-bit Steam ID (starts with 76561198...)
+
+2. Replace the placeholder Steam IDs in index.html:
+   - Find data-steam-id="76561198XXXXXXXXX"
+   - Replace with actual Steam IDs like data-steam-id="76561198123456789"
+
+3. Optional: Set up backend Steam API integration:
+   - Get Steam Web API key from: https://steamcommunity.com/dev/apikey
+   - Create backend endpoint to fetch Steam profiles
+   - Replace imgur links with dynamic Steam avatar URLs
+
+Current status: Using placeholder IDs with Steam Community links
+        `);
+    }
+    
+    console.log('🎮 Steam profile integration initialized');
+}
+
+// Override the original countdown with the fixed version
+if (typeof updateCountdown !== 'undefined') {
+    updateCountdown = fixedCountdownUpdate;
+}
+
+console.log('✅ 3D Models Toggle and Steam Integration Ready!');
