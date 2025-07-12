@@ -206,18 +206,7 @@ header {
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
-.mascot-svg {
-  height: 220px;
-  width: auto;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
-  animation: hologram 3s ease-in-out infinite;
-}
-
-.mascot-svg:hover {
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
-  animation: glitch-screen 0.1s ease-in-out infinite;
-}
+/* Mascot SVG base styles - this will be overridden by enhanced version below */
 
 .subtitle {
   font-size: 1.4rem;
@@ -366,21 +355,24 @@ main {
   font-size: 1.04rem;
 }
 .squad-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
   margin-bottom: 34px;
   opacity: 1;
   visibility: visible;
+  max-width: 1400px;
+  margin: 0 auto 34px auto;
+  padding: 0 20px;
 }
 .squad-card {
   background: linear-gradient(135deg, rgba(26, 26, 36, 0.9), rgba(10, 10, 15, 0.9));
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
   padding: 19px 17px 12px;
-  width: 190px;
-  min-height: 222px;
+  width: 100%;
+  max-width: 280px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -392,6 +384,7 @@ main {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  margin: 0 auto;
 }
 
 .squad-card:hover { 
@@ -851,17 +844,28 @@ body::before {
   100% { opacity: 0; transform: scale(0.5); }
 }
 
-/* Enhanced mascot with epic effects */
+/* Enhanced mascot with epic effects - improved glow around SVG shape */
 .mascot-svg {
   height: 220px;
   width: auto;
   transition: all 0.3s ease;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+  /* Multiple drop-shadows to create a soft glow around the SVG shape */
+  filter: 
+    drop-shadow(0 4px 8px rgba(0,0,0,0.3))
+    drop-shadow(0 0 10px rgba(0, 255, 255, 0.4))
+    drop-shadow(0 0 20px rgba(0, 255, 255, 0.3))
+    drop-shadow(0 0 40px rgba(0, 255, 255, 0.2));
   animation: hologram 3s ease-in-out infinite;
 }
 
 .mascot-svg:hover {
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+  /* Enhanced glow on hover with multiple layers */
+  filter: 
+    drop-shadow(0 8px 16px rgba(0,0,0,0.5))
+    drop-shadow(0 0 15px rgba(0, 255, 255, 0.6))
+    drop-shadow(0 0 30px rgba(0, 255, 255, 0.5))
+    drop-shadow(0 0 60px rgba(0, 255, 255, 0.4))
+    drop-shadow(0 0 100px rgba(0, 255, 255, 0.2));
   animation: glitch-screen 0.1s ease-in-out infinite;
 }
 
@@ -1650,6 +1654,60 @@ footer {
   }
 }
 
+/* Squad Grid Responsive Design */
+@media (max-width: 1200px) {
+  .squad-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .squad-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .squad-card {
+    max-width: 100%;
+    min-height: 230px;
+    padding: 15px 12px 10px;
+  }
+  
+  .squad-desc {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .squad-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 5px;
+  }
+  
+  .squad-card {
+    min-height: 200px;
+    padding: 12px 10px 8px;
+  }
+  
+  .squad-name {
+    font-size: 1.0rem;
+  }
+  
+  .squad-role {
+    font-size: 0.9rem;
+  }
+  
+  .squad-desc {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+}
+
 /* AI Chat Container - Cyberpunk Style */
 .ai-chat-container {
   height: 400px;
@@ -2190,5 +2248,46 @@ footer {
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* Accessibility and SEO improvements */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 8px;
+  z-index: 100;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cyber-card {
+    border: 2px solid var(--accent-color);
+  }
+  
+  .cyber-text {
+    color: #ffffff;
   }
 }

@@ -473,37 +473,12 @@ function initAdvancedParticles() {
     }
 }
 
-// Epic countdown with enhanced effects
+// Epic countdown with enhanced effects - DISABLED to prevent conflicts
+// This function was causing conflicts with fixedCountdownUpdate
 function epicCountdownUpdate() {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30); // 30 days from now
-    
-    const now = new Date();
-    const distance = targetDate - now;
-
-    if (distance > 0) {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        const countdownBoxes = document.querySelectorAll('.countdown-box');
-        if (countdownBoxes.length >= 4) {
-            countdownBoxes[0].firstChild.textContent = String(days).padStart(2, '0');
-            countdownBoxes[1].firstChild.textContent = String(hours).padStart(2, '0');
-            countdownBoxes[2].firstChild.textContent = String(minutes).padStart(2, '0');
-            countdownBoxes[3].firstChild.textContent = String(seconds).padStart(2, '0');
-            
-            // Epic pulse effect on seconds change
-            const currentSeconds = parseInt(countdownBoxes[3].firstChild.textContent);
-            if (seconds !== currentSeconds) {
-                countdownBoxes[3].style.animation = 'cyber-pulse 0.5s ease, epic-loading 0.3s ease';
-                setTimeout(() => {
-                    countdownBoxes[3].style.animation = 'cyber-pulse 2s ease-in-out infinite';
-                }, 500);
-            }
-        }
-    }
+    // This function is disabled to prevent countdown timer conflicts
+    // The main countdown is handled by fixedCountdownUpdate()
+    return;
 }
 
 // Enhanced mascot with epic interactions
@@ -600,8 +575,7 @@ function initEpicEffects() {
     initEpicSounds();
     epicParallaxEffect();
     
-    // Replace normal countdown with epic version
-    setInterval(epicCountdownUpdate, 1000);
+    // Epic countdown timer removed to prevent conflicts with fixedCountdownUpdate
     
     // Initialize HUD
     initEpicHUD();
@@ -980,9 +954,9 @@ function updateCountdown() {
     }
 }
 
-// Fixed Countdown Function
+// Fixed Countdown Function - Improved to prevent glitches and extra zeros
 function fixedCountdownUpdate() {
-    const targetDate = new Date('2025-08-15T20:00:00').getTime(); // Set a proper future date
+    const targetDate = new Date('2025-07-17T23:59:59').getTime(); // Countdown bis 17.07.2025
     const now = new Date().getTime();
     const distance = targetDate - now;
 
@@ -994,46 +968,60 @@ function fixedCountdownUpdate() {
 
         const countdownBoxes = document.querySelectorAll('.countdown-box');
         if (countdownBoxes.length >= 4) {
-            // Safely update countdown without causing glitches
+            // Update countdown values safely with proper formatting
             const newValues = [
-                String(days).padStart(2, '0'),
-                String(hours).padStart(2, '0'),
-                String(minutes).padStart(2, '0'),
-                String(seconds).padStart(2, '0')
+                String(Math.max(0, days)).padStart(2, '0'),
+                String(Math.max(0, hours)).padStart(2, '0'),
+                String(Math.max(0, minutes)).padStart(2, '0'),
+                String(Math.max(0, seconds)).padStart(2, '0')
             ];
             
             countdownBoxes.forEach((box, index) => {
-                const textNode = box.firstChild;
-                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-                    if (textNode.textContent !== newValues[index]) {
-                        textNode.textContent = newValues[index];
+                // Find the span element with aria-label for screen readers
+                const spanElement = box.querySelector('span[aria-label]');
+                if (spanElement) {
+                    // Only update if the value has actually changed to prevent flickering
+                    if (spanElement.textContent !== newValues[index]) {
+                        spanElement.textContent = newValues[index];
                         
-                        // Add subtle pulse effect only on change
-                        if (index === 3) { // Only animate seconds
-                            box.style.transform = 'scale(1.05)';
+                        // Add subtle pulse effect only on seconds change
+                        if (index === 3) {
+                            box.style.transform = 'scale(1.02)';
+                            box.style.transition = 'transform 0.15s ease';
                             setTimeout(() => {
                                 box.style.transform = '';
-                            }, 200);
+                            }, 150);
                         }
                     }
                 } else {
-                    // If the structure is different, find the right element
-                    const numberElement = box.querySelector('.countdown-number') || box;
-                    if (numberElement.textContent !== newValues[index]) {
-                        numberElement.textContent = newValues[index];
+                    // Fallback: update the first text node if span is not found
+                    const textNode = box.firstChild;
+                    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                        if (textNode.textContent !== newValues[index]) {
+                            textNode.textContent = newValues[index];
+                        }
                     }
                 }
             });
         }
     } else {
-        // Countdown expired
+        // Countdown expired - show all zeros
+        const countdownSpans = document.querySelectorAll('.countdown-box span[aria-label]');
         const countdownBoxes = document.querySelectorAll('.countdown-box');
-        countdownBoxes.forEach(box => {
-            const textNode = box.firstChild;
-            if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-                textNode.textContent = '00';
-            }
-        });
+        
+        if (countdownSpans.length > 0) {
+            countdownSpans.forEach(span => {
+                span.textContent = '00';
+            });
+        } else {
+            // Fallback for boxes without spans
+            countdownBoxes.forEach(box => {
+                const textNode = box.firstChild;
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = '00';
+                }
+            });
+        }
     }
 }
 

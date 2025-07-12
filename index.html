@@ -3,8 +3,40 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>KH-KP - Keine Hose Kein Problem!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Google Fonts - Hestia -->
+  <title>KHKP - Keine Hose Kein Problem | Deutschsprachige eSport Gaming Community</title>
+  <meta name="description" content="KHKP ist eine deutschsprachige eSport-Organisation aus 2018. Professionelle Gaming Community für Shooter, Party- und Fun-Spiele mit fairem Teamplay und regionalem Fokus.">
+  <meta name="keywords" content="KHKP, Gaming Community, eSport, Counter-Strike, Gaming Clan, Keine Hose Kein Problem, deutschsprachig, Gaming Team">
+  <meta name="author" content="KHKP Gaming Community">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://khkp-homepage.de/">
+  <meta property="og:title" content="KHKP - Keine Hose Kein Problem | Gaming Community">
+  <meta property="og:description" content="Deutschsprachige eSport-Organisation seit 2018. Professionelle Gaming Community für Shooter und Fun-Spiele.">
+  <meta property="og:image" content="img/cropped-Logo-3_2_5_5.png">
+  <meta property="og:locale" content="de_DE">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://khkp-homepage.de/">
+  <meta property="twitter:title" content="KHKP - Keine Hose Kein Problem | Gaming Community">
+  <meta property="twitter:description" content="Deutschsprachige eSport-Organisation seit 2018. Professionelle Gaming Community für Shooter und Fun-Spiele.">
+  <meta property="twitter:image" content="img/cropped-Logo-3_2_5_5.png">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/cropped-Logo-3_2_5_5.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/cropped-Logo-3_2_5_5.png">
+  <link rel="apple-touch-icon" href="img/cropped-Logo-3_2_5_5.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://khkp-homepage.de/">
+  
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  
+  <!-- Google Fonts - Hestia -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -16,22 +48,58 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
   <!-- External CSS -->
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "KHKP - Keine Hose Kein Problem",
+    "alternateName": "KHKP Gaming Community",
+    "url": "https://khkp-homepage.de/",
+    "logo": "https://khkp-homepage.de/img/cropped-Logo-3_2_5_5.png",
+    "description": "Deutschsprachige eSport-Organisation seit 2018. Professionelle Gaming Community für Shooter, Party- und Fun-Spiele.",
+    "foundingDate": "2018",
+    "sameAs": [
+      "https://steamcommunity.com/groups/khkp"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "General Inquiry",
+      "availableLanguage": "German"
+    },
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Gaming Community"
+    }
+  }
+  </script>
 </head>
 
-<body> <!-- Navigation -->
-  <nav class="navbar">
+<body> 
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Hauptnavigation">
     <div class="nav-container">
-      <div class="nav-menu"> <a href="#home" class="nav-link">Home</a> <a href="#squad" class="nav-link">Squad</a> <a
-          href="#matches" class="nav-link">Matches</a> <a href="#contact" class="nav-link">Kontakt</a> </div>
-      <div class="nav-logo"> <img src="img/cropped-Logo-3_2_5_5.png" alt="KHKP Logo"> </div>
+      <div class="nav-menu"> 
+        <a href="#home" class="nav-link" aria-label="Zur Startseite">Home</a> 
+        <a href="#squad" class="nav-link" aria-label="Unser Gaming Squad">Squad</a> 
+        <a href="#matches" class="nav-link" aria-label="Liga Matches und Ergebnisse">Matches</a> 
+        <a href="#contact" class="nav-link" aria-label="Kontakt und Impressum">Kontakt</a> 
+      </div>
+      <div class="nav-logo"> 
+        <img src="img/cropped-Logo-3_2_5_5.png" alt="KHKP - Keine Hose Kein Problem Gaming Community Logo"> 
+      </div>
     </div>
   </nav>
-  <header id="home"> 
+  <header id="home" role="banner"> 
     <!-- Epic Background Effects -->
     <div id="particles-js"></div> 
     <canvas id="matrix-bg"></canvas>
     <div class="parallax-bg"> 
-      <img src="img/bg2.png" alt="Background" class="bg-image"> 
+      <img src="img/bg2.png" alt="Gaming Background - Cyberpunk Atmosphäre" class="bg-image"> 
     </div>
     
     <!-- Weather Effects Canvas -->
@@ -117,188 +185,242 @@
       </div>
     </div>
   </header>
-  <main>
-    <section class="intro-section" data-aos="fade-up" data-aos-duration="800">
-      <h2 class="cyber-title">Erfolg ist kein Glück.</h2>
+  <main id="main-content" role="main">
+    <section class="intro-section" data-aos="fade-up" data-aos-duration="800" aria-labelledby="intro-heading">
+      <h1 id="intro-heading" class="cyber-title">Erfolg ist kein Glück.</h1>
       <p class="cyber-text">Sondern nur das Ergebnis von Nicht-Aufgeben und Armying. Der Loot zählt leider nichts
         zurück, es kommt auch nicht darauf an, was du weißt. Du bist kacke oder nicht.</p>
-      <div class="features">
-        <div class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="100"> <i
-            class="fas fa-bullseye cyber-icon"></i>
-          <h4>Aim</h4>
+      <div class="features" role="region" aria-label="Unsere Gaming Stärken">
+        <article class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="100"> 
+          <i class="fas fa-bullseye cyber-icon" aria-hidden="true"></i>
+          <h2>Aim</h2>
           <p>Über unser Aiming redet man weit zu selten – der Faktor, der den Gegner im Spawn zurücklässt. Und gemeinsam
             auf Augenhöhe schießt nur ein Squad.</p>
-        </div>
-        <div class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="200"> <i
-            class="fas fa-globe-europe cyber-icon"></i>
-          <h4>Regional</h4>
+        </article>
+        <article class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="200"> 
+          <i class="fas fa-globe-europe cyber-icon" aria-hidden="true"></i>
+          <h2>Regional</h2>
           <p>Wir spielen zusammen regelmäßig, und sind fast nur Talente aus dem Großraum und der Nachbarschaft
             vertreten!</p>
-        </div>
-        <div class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="300"> <i
-            class="fas fa-users cyber-icon"></i>
-          <h4>Community</h4>
+        </article>
+        <article class="feature cyber-card hvr-grow" data-aos="fade-up" data-aos-delay="300"> 
+          <i class="fas fa-users cyber-icon" aria-hidden="true"></i>
+          <h2>Community</h2>
           <p>Es ist nicht das Ausharren, sondern der Spaß an einer Community, der uns vorantreibt. Unsere Gemeinschaft
             ist der wahre Motor des Erfolgs.</p>
+        </article>
+      </div>
+    </section>
+    <section class="countdown-section" data-aos="zoom-in" data-aos-duration="1000" aria-labelledby="countdown-heading">
+      <h2 id="countdown-heading" class="visually-hidden">Countdown Timer</h2>
+      <div class="countdown-container" role="timer" aria-live="polite" aria-label="Live Countdown Timer">
+        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="100"> 
+          <span aria-label="Tage">00</span>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="200"> 
+          <span aria-label="Stunden">00</span>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="300"> 
+          <span aria-label="Minuten">00</span>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="400"> 
+          <span aria-label="Sekunden">00</span>
+          <div class="countdown-label">Seconds</div>
         </div>
       </div>
     </section>
-    <section class="countdown-section" data-aos="zoom-in" data-aos-duration="1000">
-      <div class="countdown-container">
-        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="100"> 00 <div
-            class="countdown-label">Days</div>
-        </div>
-        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="200"> 00 <div
-            class="countdown-label">Hours</div>
-        </div>
-        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="300"> 00 <div
-            class="countdown-label">Minutes</div>
-        </div>
-        <div class="countdown-box cyber-neon" data-aos="flip-left" data-aos-delay="400"> 00 <div
-            class="countdown-label">Seconds</div>
-        </div>
-      </div>
-    </section>
-    <section id="squad" class="squad-section">
-      <h3 class="cyber-title" data-aos="fade-down">Unser Squad</h3>
-      <p class="cyber-text" data-aos="fade-up">KHKP ist eine deutschsprachige eSport-Organisation, die in 2018 gegründet
-        wurde und seit jeher aktive Shooter-, Party- und Fun-Spieler aus der Umgebung und Online vereint.<br> Unser
-        Anspruch ist es, nachhaltig, fair & immer ein verlässlicher und coole Community als zuverlässiger Partner zu
-        agieren.</p>
-      <div class="squad-grid">
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="100" data-steam-id="76561198182901639">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/rDbXW6p.png" alt="Hannes">
+    <section id="squad" class="squad-section" aria-labelledby="squad-heading">
+      <h2 id="squad-heading" class="cyber-title" data-aos="fade-down">Unser Squad</h2>
+      <p class="cyber-text" data-aos="fade-up">KHKP ist eine deutschsprachige eSport-Organisation, die 2018 gegründet
+        wurde und seit jeher aktive Shooter-, Party- und Fun-Spieler aus der Umgebung und dem Online-Bereich vereint.<br> Unser
+        Anspruch ist es, nachhaltig, fair und immer als verlässliche und coole Community zu agieren.</p>
+      <div class="squad-grid" role="region" aria-label="Gaming Squad Mitglieder">
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="100" data-steam-id="76561198182901639">
+          <div class="card-glow"></div> 
+          <img src="/img/42.jpg" alt="42amStart - KHKP Gaming Community">
+          <div class="squad-name">42amStart</div>
+          <div class="squad-role">Community Spirit</div>
+          <div class="squad-desc">Immer am Start, immer nen flotten Spruch, immer da, zur richtigen Zeit. Gerade dann, wenn es Bier gibt.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="200" data-steam-id="76561198110124196">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Mirrorfy - Sniper Spezialist von KHKP">
+          <div class="squad-name">Mirrorfy</div>
+          <div class="squad-role">Sniper God</div>
+          <div class="squad-desc">Schießt wie ein junger Gott, rennt wie ein junges Wiesel, immer Bock zu zocken. Außer in der Raucherpause.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="300" data-steam-id="76561198050134862">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Ela - Gute Seele von KHKP">
+          <div class="squad-name">Ela</div>
+          <div class="squad-role">Team Support</div>
+          <div class="squad-desc">Eigentlich Mirrorfy, doch ihr Name wurde geklaut. Bei den ganzen Skillpoints im Feat. "Gute Seele" fehlen leider ein paar beim "Aim" :D</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="400" data-steam-id="76561198105068599">
+          <div class="card-glow"></div> 
+          <img src="/img/om3ga.gif" alt="OM3GA - Mysteriöser Gaming Partner von KHKP">
+          <div class="squad-name">OM3GA</div>
+          <div class="squad-role">Phantom Player</div>
+          <div class="squad-desc">Es wird gesagt, wenn du alleine auf dem TS in einem Channel bist, dreimal Erik sagst, spawnt er und spielt mit dir zusammen.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="500" data-steam-id="76561198036711420">
+          <div class="card-glow"></div> 
+          <img src="/img/daugel.jpg" alt="Daugelmeier - Battlefield Spezialist von KHKP">
+          <div class="squad-name">Daugelmeier</div>
+          <div class="squad-role">Battlefield King</div>
+          <div class="squad-desc">In CS und Valo noch halbwegs zu schlagen, wenn du ihm aber in Battlefield o.Ä. begegnest - lauf!</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="600" data-steam-id="76561198032856594">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Fleischer - Taktiker von KHKP">
+          <div class="squad-name">PC Fleischer</div>
+          <div class="squad-role">Silent Hunter</div>
+          <div class="squad-desc">Psst. Hörst du es? Warte noch 'ne halbe Stunde. Dann ist Fleischer nämlich da. Auf leisen Sohlen kreist er die Gegner ein und umrundet die halbe Map.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="700" data-steam-id="76561198182901639">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Hannes - Gründer von KHKP">
           <div class="squad-name">Hannes</div>
-          <div class="squad-role">Gründer & Allrounder</div>
-          <div class="squad-desc">Er kümmert sich um alles und hat meistens bunte Boxershorts an.</div>
-        </div>
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="200" data-steam-id="76561198110124196">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/rDbXW6p.png" alt="Mirrofy">
-          <div class="squad-name">Mirrowfy</div>
-          <div class="squad-role">Sniper</div>
-          <div class="squad-desc">Der beste Awpler. Macht den zweiten und dritten Klick im Squad.</div>
-        </div>
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="300" data-steam-id="76561198050134862">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/rDbXW6p.png" alt="OMG364">
-          <div class="squad-name">OMG364</div>
-          <div class="squad-role">Entry</div>
-          <div class="squad-desc">Geht voran, wenn keiner will. Immer „kurz vorne" dabei.</div>
-        </div>
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="400" data-steam-id="76561198105068599">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/rDbXW6p.png" alt="Vince">
+          <div class="squad-role">Kill-Count Legend</div>
+          <div class="squad-desc">Erfinder der "Hannes"-Grenze. 20 Kills und das Game war ein Erfolg. Alles darunter: Schmutz!</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="800" data-steam-id="76561198110124197">
+          <div class="card-glow"></div> 
+          <img src="/img/Honix.jpg" alt="Tinkmaster Honix - Taktischer Spieler von KHKP">
+          <div class="squad-name">Tinkmaster Honix</div>
+          <div class="squad-role">Tactical Genius</div>
+          <div class="squad-desc">Das T für seinen taktischen Einsatz von Utility und das G für die Genauigkeit beim Schießen.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="900" data-steam-id="76561198036711420">
+          <div class="card-glow"></div> 
+          <img src="/img/leon.jpg" alt="xen0L - Developer und Pro-Gamer von KHKP">
+          <div class="squad-name">xen0L</div>
+          <div class="squad-role">Pro Potential</div>
+          <div class="squad-desc">Manche munkeln mit einem anderen (koordinierteren und besseren) Team stünde seiner Valo-Pro-Karriere nichts im Weg.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="1000" data-steam-id="76561198105068599">
+          <div class="card-glow"></div> 
+          <img src="/img/vince.gif" alt="Vince - Allround Gaming Champion von KHKP">
           <div class="squad-name">Vince</div>
-          <div class="squad-role">Rifler</div>
-          <div class="squad-desc">Immer solide. Kann einen sauber abziehen und kann auch Chef sein.</div>
-        </div>
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="500" data-steam-id="76561198036711420">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/k5OUe2S.png" alt="xen0L">
-          <div class="squad-name">sxe6L</div>
-          <div class="squad-role">Dev</div>
-          <div class="squad-desc">Chef der Offsite und technischer Head-Admin/Manager</div>
-        </div>
-        <div class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="600" data-steam-id="76561198032856594">
-          <div class="card-glow"></div> <img src="https://i.imgur.com/rDbXW6p.png" alt="Gottlos 21">
-          <div class="squad-name">Gottlos 21</div>
-          <div class="squad-role">Chief Fun Officer</div>
-          <div class="squad-desc">Für jeden Spaß zu haben. Macht den Unterschied aus.</div>
-        </div>
+          <div class="squad-role">Universal Champion</div>
+          <div class="squad-desc">Ob Shooter, MOBA, Rocket League oder Schnick Schnack Schnuck mit dem 2-jährigen Neffen. Vince spielt, um zu gewinnen, zu vernichten.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="1100" data-steam-id="76561198032856595">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Kontroller - Souls-Like Gaming God von KHKP">
+          <div class="squad-name">Kontroller</div>
+          <div class="squad-role">Souls-Like God</div>
+          <div class="squad-desc">Souls-Like-God der Truppe. Aber sonst zu eigentlich jedem Game zu überzeugen. Hauptsache es hat irgendwo Bling Bling und/oder Anime Girls.</div>
+        </article>
+        <article class="squad-card cyber-card hvr-float" data-aos="fade-up" data-aos-delay="1200" data-steam-id="76561198032856596">
+          <div class="card-glow"></div> 
+          <img src="/img/mirrorfy.jpg" alt="Freshdachs - KHKP Gaming Community">
+          <div class="squad-name">Freshdachs</div>
+          <div class="squad-role">-</div>
+          <div class="squad-desc">-</div>
+        </article>
       </div>
     </section>
-    <section id="matches" class="matches-section">
-      <h4 class="cyber-title" data-aos="fade-down">Liga Matches</h4>
-      <div class="match-bubbles">
-        <div class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="100"> <img
-            src="https://i.imgur.com/jPWvQ8f.png" alt="brudi">
+    <section id="matches" class="matches-section" aria-labelledby="matches-heading">
+      <h2 id="matches-heading" class="cyber-title" data-aos="fade-down">Liga Matches</h2>
+      <div class="match-bubbles" role="region" aria-label="Liga Match Ergebnisse und Zitate">
+        <article class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="100"> 
+          <img src="https://i.imgur.com/jPWvQ8f.png" alt="brodee Gaming Profile">
           <div class="bubble-name">brodee</div>
           <div class="bubble-desc">„Das wird eh richtig gut."</div>
-        </div>
-        <div class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="200"> <img
-            src="https://i.imgur.com/Mj5R6w7.png" alt="sh4rkz">
+        </article>
+        <article class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="200"> 
+          <img src="https://i.imgur.com/Mj5R6w7.png" alt="sh4rkz Gaming Profile">
           <div class="bubble-name">sh4rkz</div>
           <div class="bubble-desc">„Man weiß nie, was passieren wird."</div>
-        </div>
-        <div class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="300"> <img
-            src="https://i.imgur.com/MEvPrGa.png" alt="shneexel">
+        </article>
+        <article class="bubble cyber-card hvr-pulse" data-aos="zoom-in" data-aos-delay="300"> 
+          <img src="https://i.imgur.com/MEvPrGa.png" alt="shneexel Gaming Profile">
           <div class="bubble-name">shneexel</div>
           <div class="bubble-desc">„Ihr spielt wie 'ne Wand aus Granit."</div>
-        </div>
+        </article>
       </div>
     </section>
     
     <!-- ADVANCED EPIC FEATURES SECTION -->
-    <section class="advanced-features-section" data-aos="fade-up" data-aos-duration="1000">
-      <h3 class="cyber-title">Epic Gaming Features</h3>
-      <div class="advanced-features-grid">
+    <section class="advanced-features-section" data-aos="fade-up" data-aos-duration="1000" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="cyber-title">Epic Gaming Features</h2>
+      <div class="advanced-features-grid" role="region" aria-label="Interaktive Gaming Features">
         
         <!-- Holographic 3D Models -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="100">
-          <h4 class="cyber-title">Holographic Models</h4>
-          <canvas id="hologram-canvas"></canvas>
-        </div>
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="cyber-title">Holographic Models</h3>
+          <canvas id="hologram-canvas" aria-label="3D Hologramm Display"></canvas>
+        </article>
         
         <!-- AI Chatbot -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="200">
-          <div class="ai-chat-container">
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="200">
+          <div class="ai-chat-container" role="application" aria-label="KI Gaming Assistent">
             <div class="chat-header">AI Gaming Assistant</div>
-            <div class="chat-messages"></div>
+            <div class="chat-messages" role="log" aria-live="polite"></div>
             <div class="chat-input-container">
-              <input type="text" class="chat-input" placeholder="Ask me anything about KHKP...">
-              <button class="chat-send">🚀</button>
+              <input type="text" class="chat-input" placeholder="Ask me anything about KHKP..." aria-label="Chat Eingabe">
+              <button class="chat-send" aria-label="Nachricht senden">🚀</button>
             </div>
           </div>
-        </div>
+        </article>
         
         <!-- Interactive Mini-Game -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="300">
-          <div class="mini-game-container">
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="300">
+          <div class="mini-game-container" role="application" aria-label="Reflex Training Spiel">
             <div class="game-header">
               <h3>Reflex Trainer</h3>
             </div>
             <div class="game-controls">
-              <button class="game-start">Start Game</button>
-              <div class="game-score">Score: 0</div>
+              <button class="game-start" aria-label="Spiel starten">Start Game</button>
+              <div class="game-score" aria-live="polite">Score: 0</div>
             </div>
-            <div class="game-area"></div>
+            <div class="game-area" role="region" aria-label="Spielbereich"></div>
           </div>
-        </div>
+        </article>
         
         <!-- Sound Visualizer -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="400">
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="400">
           <div class="sound-visualizer">
-            <h4 class="cyber-title">Sound Visualizer</h4>
-            <canvas id="visualizer-canvas"></canvas>
+            <h3 class="cyber-title">Sound Visualizer</h3>
+            <canvas id="visualizer-canvas" aria-label="Audio Visualizer"></canvas>
           </div>
-        </div>
+        </article>
         
         <!-- Server Status -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="500">
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="500">
           <div class="server-status">
             <div class="server-header">Live Server Status</div>
-            <div class="server-list"></div>
+            <div class="server-list" role="status" aria-live="polite"></div>
           </div>
-        </div>
+        </article>
         
         <!-- Performance Monitor -->
-        <div class="feature-container" data-aos="zoom-in" data-aos-delay="600">
+        <article class="feature-container" data-aos="zoom-in" data-aos-delay="600">
           <div class="performance-monitor">
             <div class="perf-header">System Performance</div>
-            <div class="perf-monitor"></div>
+            <div class="perf-monitor" role="status" aria-live="polite"></div>
           </div>
-        </div>
+        </article>
         
       </div>
     </section>
   </main>
   
   <!-- Theme Toggle Button -->
-  <button class="theme-toggle" title="Switch Theme">🎨</button>
+  <button class="theme-toggle" title="Switch Theme" aria-label="Farbschema wechseln">🎨</button>
   
   <!-- 3D Models Toggle Button -->
-  <button class="models-toggle" title="Toggle 3D Models">🎲</button>
+  <button class="models-toggle" title="Toggle 3D Models" aria-label="3D Modelle ein/ausschalten">🎲</button>
   
-  <footer id="contact">
-    <div class="footer-links"> <a href="impressum.html">Impressum</a> <a
-        href="datenschutz.html">Datenschutz</a> </div>
+  <footer id="contact" role="contentinfo">
+    <nav class="footer-links" aria-label="Footer Navigation"> 
+      <a href="impressum.html" rel="noopener">Impressum</a> 
+      <a href="datenschutz.html" rel="noopener">Datenschutz</a> 
+    </nav>
     <div>© KHKP 2018-2025 · Hosted in Low-End-LAN-World</div>
   </footer> <!-- Modern JavaScript Libraries --> <!-- GSAP for advanced animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
