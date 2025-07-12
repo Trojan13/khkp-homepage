@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function initializeAllEffects() {
     console.log('🎮 Starting KHKP EPIC Gaming Site Initialization...');
     
+    // Initialize font loading first to prevent errors
+    initFontLoading();
+    
     // Show epic loading screen first
     showEpicLoadingScreen();
     
@@ -1109,7 +1112,7 @@ function initDudeAnimation() {
     }
 }
 
-// Smooth scrolling with easing
+// Smooth scrolling with easing - Fixed to prevent console errors
 function initSmoothScrolling() {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
@@ -1120,19 +1123,33 @@ function initSmoothScrolling() {
             if (targetElement) {
                 const offsetTop = targetElement.offsetTop - 80;
                 
-                // GSAP smooth scroll
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(window, {
-                        duration: 1.5,
-                        scrollTo: offsetTop,
-                        ease: 'power3.inOut'
-                    });
+                // GSAP smooth scroll with proper syntax and error handling
+                if (typeof gsap !== 'undefined' && gsap.plugins && gsap.plugins.ScrollToPlugin) {
+                    try {
+                        gsap.to(window, {
+                            duration: 1.5,
+                            scrollTo: { y: offsetTop, autoKill: false },
+                            ease: 'power3.inOut'
+                        });
+                    } catch (error) {
+                        console.warn('GSAP scrollTo failed, using fallback:', error);
+                        // Fallback to native smooth scroll
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
                 } else {
                     // Fallback smooth scroll
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                    try {
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    } catch (error) {
+                        // Final fallback for very old browsers
+                        window.scrollTo(0, offsetTop);
+                    }
                 }
             }
         });
@@ -2149,6 +2166,7 @@ function initEpicConsoleCommands() {
                 el.style.color = '#00ff00';
                 el.style.textShadow = '0 0 10px #00ff00';
             });
+
             console.log('🕶️ ENTERING THE MATRIX... 🕶️');
         }
     };
@@ -2410,6 +2428,31 @@ function showEpicLoadingScreen() {
             loadingStyles.remove();
         }, 1000);
     }, 4000);
+}
+
+// Font loading optimization to prevent glyph bbox errors
+function initFontLoading() {
+    // Add fonts-loading class to body initially
+    document.body.classList.add('fonts-loading');
+    
+    // Check if fonts are loaded
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+            document.body.classList.remove('fonts-loading');
+            document.body.classList.add('fonts-loaded');
+            console.log('✅ Fonts loaded successfully');
+        }).catch(() => {
+            console.warn('⚠️ Font loading failed, using fallbacks');
+            document.body.classList.remove('fonts-loading');
+            document.body.classList.add('fonts-loaded');
+        });
+    } else {
+        // Fallback for older browsers
+        setTimeout(() => {
+            document.body.classList.remove('fonts-loading');
+            document.body.classList.add('fonts-loaded');
+        }, 3000);
+    }
 }
 
 // EPIC PERFORMANCE OPTIMIZATIONS

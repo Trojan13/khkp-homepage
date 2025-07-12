@@ -2291,3 +2291,36 @@ footer {
     color: #ffffff;
   }
 }
+
+/* Font loading optimization and fallbacks to prevent glyph bbox errors */
+/* Font Awesome icon fallbacks and optimization */
+.fas, .far, .fab {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', sans-serif !important;
+  font-weight: 900;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent font loading errors */
+.fa, .fas, .far, .fab {
+  display: inline-block;
+  min-width: 1em;
+  text-align: center;
+  /* Improve rendering performance */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Font loading states */
+.fonts-loading .fas,
+.fonts-loading .far,
+.fonts-loading .fab {
+  visibility: hidden;
+}
+
+.fonts-loaded .fas,
+.fonts-loaded .far,
+.fonts-loaded .fab {
+  visibility: visible;
+}
